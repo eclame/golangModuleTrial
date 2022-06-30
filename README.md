@@ -43,3 +43,17 @@ go: to add module requirements and sums:
         go mod tidy
 ```
 
+
+ローカルパッケージ参照するときはgo.modに追記する必要あり<br/>
+replace [パッケージ名] => [ローカルプロジェクトのPath(go.modからの相対パス？)]
+```diff
+module example.com/trial
+
+go 1.18
+
++ replace example.com/trial/packages => ./packages
+```
+以下のコマンドでもOK
+```
+$ go mod edit -replace example.com/trial/packages=./packages
+```
